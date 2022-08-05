@@ -334,22 +334,48 @@ class Graph{
             
         }
         
+    char ** get_Matrix_Minesweeper(){
+            char ** matrix_char=0;
+            matrix_char=new char *[this->m_num_rows_minesweeper];
+            for(int i=0;i<this->m_num_rows_minesweeper;i++)matrix_char[i]=new char[this->m_num_column_minesweeper];
+            
+            int counter=1;
+            Vertex* aux=0;
+            for(int i=0;i<this->m_num_rows_minesweeper;i++){
+                for(int j=0;j<this->m_num_column_minesweeper;j++){
+                    aux=look_for_Node(counter);
+                    matrix_char[i][j]=*(aux->m_label);       
+                    counter++;
+                }
+                
+            }
 
+            return matrix_char;
+        }
 };
 
 int main(){
     
    
     Graph grafo;
-
-    grafo.make_full_connected_table_minesweeper(10,10);
+    int num_filas=7;
+    int num_col=9;
+    grafo.make_full_connected_table_minesweeper(num_filas,num_col);
+    cout<<"Table from class\n";
     // grafo.print_Adjacency_list();
     // grafo.print_Adjacency_matrix();
+    // grafo.print_Adjacency_matrix();
     grafo.print_Table_minesweeper();
-    // for(int i=0;i<5;i++){
-    //     grafo.insert_Node(i);
-    //     // cout<<i<<endl;
-    // }
+    cout<<"Matrix\n";
+    char **table_of_mines_game=grafo.get_Matrix_Minesweeper();
+    for(int i=0;i<num_filas;i++){
+        for(int j=0;j<num_col;j++){
+
+            cout<<table_of_mines_game[i][j]<<"  ";
+        }
+        cout<<endl;
+        
+    }
     
     // grafo.insert_Edge(0,1,15);
     // grafo.insert_Edge(1,0,20);
